@@ -42,3 +42,32 @@
   </main>
 </body>
 </html>
+
+<!-- PROJECTS -->
+<section id="projects" class="card">
+  <h2>Projects</h2>
+
+  <article style="margin-bottom:18px;">
+    <h3 style="margin:0 0 6px;">Customer Segmentation with Clustering</h3>
+    <p style="margin:0 0 8px;">
+      I explored three datasets (Synthetic, Mall Customers, and Wine Quality) and tried
+      multiple clustering methods-K-Means, Hierarchical/Agglomerative, DBSCAN, and GMM.
+      After standardizing features, I used the Elbow curve and Silhouette score to pick
+      a good K for K-Means, and compared clusters using Silhouette, Davies-Bouldin, and
+      Calinski-Harabasz. The segments were interpretable (e.g., value vs. high-spend
+      groups), and DBSCAN helped when I suspected noise. Tech: pandas, scikit-learn, matplotlib.
+    </p>
+  </article>
+
+  <article>
+    <h3 style="margin:0 0 6px;">Fitness Center Retention (Churn) Analysis</h3>
+    <p style="margin:0 0 8px;">
+      I analyzed churn for a fitness center, then trained Logistic Regression, KNN,
+      Random Forest, and SVM to predict who might leave. I did EDA, encoded/scaled
+      features, and compared models on accuracy, precision, recall, and F1. Usage
+      frequency and tenure were consistently important signals; tree models captured
+      non-linear effects, while Logistic Regression gave a transparent baseline.
+      Tech: pandas, scikit-learn, matplotlib.
+    </p>
+  </article>
+</section>
