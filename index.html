@@ -4,133 +4,211 @@
   <meta charset="utf-8" />
   <title>Pradeep Anand – Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: Arial, Helvetica, sans-serif; margin: 0; line-height: 1.6; }
-    header { padding: 24px; border-bottom: 1px solid #eee; }
-    .container { max-width: 900px; margin: 0 auto; padding: 24px; }
-    nav a { margin-right: 16px; text-decoration: none; }
-    h1, h2 { margin: 0 0 12px; }
-    section { margin: 32px 0; }
-    .card { background:#fafafa; border:1px solid #eee; border-radius:10px; padding:20px; }
-    .muted { color:#555; }
+    /* ---------- Theme & base ---------- */
+    :root{
+      --bg:#0f172a;          /* deep slate */
+      --card:#111827;        /* slightly lighter */
+      --text:#e5e7eb;        /* light gray */
+      --muted:#9ca3af;       /* mid gray */
+      --accent:#38bdf8;      /* sky blue */
+      --border:#1f2937;
+    }
+
+    html{ scroll-behavior:smooth; }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1e293b, transparent 70%),
+        radial-gradient(1200px 600px at 90% 0%, #0b2239, transparent 60%),
+        var(--bg);
+      line-height:1.7;
+    }
+
+    /* ---------- Layout ---------- */
+    .container{ max-width: 980px; margin:0 auto; padding:24px; }
+    header{
+      position:sticky; top:0; z-index:10;
+      background: linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.75));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    h1{ font-weight:800; letter-spacing:.3px; margin:0 0 6px; }
+    h2{ font-weight:800; margin:0 0 12px; }
+    h3{ font-weight:700; margin:0 0 6px; }
+    .muted{ color:var(--muted); }
+
+    nav a{
+      margin-right:18px; text-decoration:none; color:var(--text); font-weight:600;
+      position:relative; padding-bottom:4px;
+      transition: color .2s ease;
+    }
+    nav a::after{
+      content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform:scaleX(0); transform-origin:center; transition: transform .25s ease;
+    }
+    nav a:hover{ color:var(--accent); }
+    nav a:hover::after{ transform:scaleX(1); }
+
+    section{ margin:32px 0; }
+
+    /* ---------- Card with hover lift ---------- */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid var(--border);
+      border-radius:14px; padding:22px;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.25);
+      border-color: #263241;
+    }
+
+    /* ---------- Buttons (optional link style) ---------- */
+    .btn{
+      display:inline-block; padding:10px 14px; border-radius:10px;
+      background: linear-gradient(135deg, #1f4a63, #0ea5e9);
+      color:white; text-decoration:none; font-weight:600;
+      transition: filter .2s ease, transform .2s ease;
+    }
+    .btn:hover{ filter:brightness(1.08); transform: translateY(-1px); }
+
+    /* ---------- Section fade-up animation ---------- */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(12px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    .reveal{ animation: fadeUp .6s ease both; }
   </style>
 </head>
+
 <body>
-  <header class="container">
-    <h1>portfolio-pradeepanand</h1>
-    <p class="muted">Portfolio – App Dev for Analytics</p>
-    <nav>
-      <a href="#about">About Me</a>
-      <!-- You can add more links later: Projects, Contact, etc. -->
-    </nav>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>portfolio-pradeepanand</h1>
+      <p class="muted">Portfolio – App Dev for Analytics</p>
+      <nav>
+        <a href="#about">About Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- ABOUT ME SECTION -->
+  <!-- Main content -->
   <main class="container">
-    <section id="about" class="card">
+
+    <!-- ABOUT -->
+    <section id="about" class="card reveal">
       <h2>About Me</h2>
       <p>
         Hi, I am <strong>Pradeep Anand</strong>, a Business Analyst with hands-on experience across
         financial services and analytics. I enjoy turning real-world problems into simple,
-        usable solutions-using clear requirements, data, and iterative delivery.
+        usable solutions—using clear requirements, data, and iterative delivery.
       </p>
-      <p class="muted">
-        Interests: product analysis, process improvement, data visualization, and API-driven systems.
-      </p>
-      <!-- Optional: replace the text above with your own 3–4 sentence intro. -->
+      <p class="muted">Interests: product analysis, process improvement, data visualization, and API-driven systems.</p>
     </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="card reveal">
+      <h2>Projects</h2>
+
+      <article style="margin-bottom:18px;">
+        <h3>Customer Segmentation with Clustering</h3>
+        <p style="margin:0 0 8px;">
+          I explored three datasets (Synthetic, Mall Customers, and Wine Quality) and tried
+          multiple clustering methods—K-Means, Hierarchical/Agglomerative, DBSCAN, and GMM.
+          After standardizing features, I used the Elbow curve and Silhouette score to pick
+          a good K for K-Means, and compared clusters using Silhouette, Davies–Bouldin, and
+          Calinski–Harabasz. The segments were interpretable (e.g., value vs. high-spend
+          groups), and DBSCAN helped when I suspected noise. Tech: pandas, scikit-learn, matplotlib.
+        </p>
+        <!-- Example button if you add a notebook/repo link later -->
+        <!-- <a class="btn" href="YOUR_LINK" target="_blank" rel="noopener">View Notebook</a> -->
+      </article>
+
+      <article>
+        <h3>Fitness Center Retention (Churn) Analysis</h3>
+        <p style="margin:0 0 8px;">
+          I analyzed churn for a fitness center, then trained Logistic Regression, KNN,
+          Random Forest, and SVM to predict who might leave. I did EDA, encoded/scaled
+          features, and compared models on accuracy, precision, recall, and F1. Usage
+          frequency and tenure were consistently important signals; tree models captured
+          non-linear effects, while Logistic Regression gave a transparent baseline.
+          Tech: pandas, scikit-learn, matplotlib.
+        </p>
+      </article>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="card reveal">
+      <h2>Skills</h2>
+      <p class="muted" style="margin-top:-6px;">What I actually use and study right now</p>
+
+      <h3 style="margin:16px 0 8px;">Programming & Data</h3>
+      <ul>
+        <li><strong>Python</strong> (pandas, scikit-learn), <strong>RStudio</strong></li>
+        <li><strong>SQL</strong> (MS SQL Server, Oracle SQL Developer)</li>
+        <li>EDA, regression & classification, hypothesis testing, machine learning basics</li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;">Visualization & BI</h3>
+      <ul>
+        <li><strong>Tableau</strong>, <strong>Power BI</strong>; data storytelling and simple dashboards</li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;">Tools for Delivery</h3>
+      <ul>
+        <li>Jira, Confluence, ServiceNow</li>
+        <li>Process mapping: IBM BlueWorks, Microsoft Visio</li>
+        <li>Productivity/design: Excel, PowerPoint, Figma</li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;">Agile & BA</h3>
+      <ul>
+        <li>Scrum ceremonies, backlog refinement, user stories & epics, UAT/SIT coordination</li>
+        <li>Requirements docs: BRD, FRD; basic A/B & regression checks for experiments</li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;">Payments & Banking Platforms</h3>
+      <ul>
+        <li>SWIFT & ISO 20022 awareness; reconciliation & ops with <strong>TLM/TLP</strong></li>
+        <li>intelliMATCH, intelliTRACS, MCH (exposure from BA roles)</li>
+      </ul>
+
+      <h3 style="margin:16px 0 8px;">Certifications</h3>
+      <ul>
+        <li><strong>CSM</strong> (Scrum Master), <strong>CSPO</strong> (Product Owner), <strong>SFPC</strong></li>
+        <li>Lean Six Sigma Foundations, Six Sigma White Belt</li>
+        <li>Machine Learning (Python) – Intermediate</li>
+        <li>Change Management Foundations</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card reveal">
+      <h2>Contact</h2>
+      <p>If you’d like to connect about coursework or projects, here are the best ways to reach me:</p>
+      <ul>
+        <li>Email (personal): <a href="mailto:pradeepanan27@gmail.com">pradeepanan27@gmail.com</a></li>
+        <li>Email (school): <a href="mailto:pradeepanand@usf.edu">pradeepanand@usf.edu</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/pradeepanand22/" target="_blank" rel="noopener">linkedin.com/in/pradeepanand22</a></li>
+        <li>Phone: <a href="tel:+18134006708">+1 (813) 400-6708</a></li>
+      </ul>
+      <p class="muted" style="margin-top:8px;">Note: This site is for my Application Development course portfolio.</p>
+    </section>
+
   </main>
 </body>
 </html>
-
-<!-- PROJECTS -->
-<section id="projects" class="card">
-  <h2>Projects</h2>
-
-  <article style="margin-bottom:18px;">
-    <h3 style="margin:0 0 6px;">Customer Segmentation with Clustering</h3>
-    <p style="margin:0 0 8px;">
-      I explored three datasets (Synthetic, Mall Customers, and Wine Quality) and tried
-      multiple clustering methods-K-Means, Hierarchical/Agglomerative, DBSCAN, and GMM.
-      After standardizing features, I used the Elbow curve and Silhouette score to pick
-      a good K for K-Means, and compared clusters using Silhouette, Davies-Bouldin, and
-      Calinski-Harabasz. The segments were interpretable (e.g., value vs. high-spend
-      groups), and DBSCAN helped when I suspected noise. Tech: pandas, scikit-learn, matplotlib.
-    </p>
-  </article>
-
-  <article>
-    <h3 style="margin:0 0 6px;">Fitness Center Retention (Churn) Analysis</h3>
-    <p style="margin:0 0 8px;">
-      I analyzed churn for a fitness center, then trained Logistic Regression, KNN,
-      Random Forest, and SVM to predict who might leave. I did EDA, encoded/scaled
-      features, and compared models on accuracy, precision, recall, and F1. Usage
-      frequency and tenure were consistently important signals; tree models captured
-      non-linear effects, while Logistic Regression gave a transparent baseline.
-      Tech: pandas, scikit-learn, matplotlib.
-    </p>
-  </article>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="card">
-  <h2>Skills</h2>
-  <p class="muted" style="margin-top:-6px;">What I actually use and study right now</p>
-
-  <h3 style="margin:16px 0 8px;">Programming & Data</h3>
-  <ul>
-    <li><strong>Python</strong> (pandas, scikit-learn), <strong>RStudio</strong></li>
-    <li><strong>SQL</strong> (MS SQL Server, Oracle SQL Developer)</li>
-    <li>EDA, regression & classification, hypothesis testing, machine learning basics</li>
-  </ul>
-
-  <h3 style="margin:16px 0 8px;">Visualization & BI</h3>
-  <ul>
-    <li><strong>Tableau</strong>, <strong>Power BI</strong>; data storytelling and simple dashboards</li>
-  </ul>
-
-  <h3 style="margin:16px 0 8px;">Tools for Delivery</h3>
-  <ul>
-    <li>Jira, Confluence, ServiceNow</li>
-    <li>Process mapping: IBM BlueWorks, Microsoft Visio</li>
-    <li>Productivity/design: Excel, PowerPoint, Figma</li>
-  </ul>
-
-  <h3 style="margin:16px 0 8px;">Agile & BA</h3>
-  <ul>
-    <li>Scrum ceremonies, backlog refinement, user stories & epics, UAT/SIT coordination</li>
-    <li>Requirements docs: BRD, FRD; basic A/B & regression checks for experiments</li>
-  </ul>
-
-  <h3 style="margin:16px 0 8px;">Payments & Banking Platforms</h3>
-  <ul>
-    <li>SWIFT & ISO 20022 awareness; reconciliation & ops with <strong>TLM/TLP</strong></li>
-    <li>intelliMATCH, intelliTRACS, MCH (exposure from BA roles)</li>
-  </ul>
-
-  <h3 style="margin:16px 0 8px;">Certifications</h3>
-  <ul>
-    <li><strong>CSM</strong> (Scrum Master), <strong>CSPO</strong> (Product Owner), <strong>SFPC</strong></li>
-    <li>Lean Six Sigma Foundations, Six Sigma White Belt</li>
-    <li>Machine Learning (Python) – Intermediate</li>
-    <li>Change Management Foundations</li>
-  </ul>
-
-  <p class="muted" style="margin-top:12px;">
-    Note: This list is summarized from my resume and will keep evolving as I learn and ship more work.
-  </p>
-</section>
-
-
-<!-- CONTACT -->
-<section id="contact" class="card">
-  <h2>Contact</h2>
-  <p>If you’d like to connect about coursework or projects, here are the best ways to reach me:</p>
-  <ul>
-    <li>Email (personal): <a href="mailto:pradeepanan27@gmail.com">pradeepanan27@gmail.com</a></li>
-    <li>Email (school): <a href="mailto:pradeepanand@usf.edu">pradeepanand@usf.edu</a></li>
-    <li>LinkedIn: <a href="https://www.linkedin.com/in/pradeepanand22/" target="_blank" rel="noopener">linkedin.com/in/pradeepanand22</a></li>
-    <li>Phone: <a href="tel:+18134006708">+1 (813) 400-6708</a></li>
-  </ul>
-  <p class="muted" style="margin-top:8px;">Note: This site is for my Application Development course portfolio.</p>
-</section>
